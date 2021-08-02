@@ -1,6 +1,6 @@
 <template>
   <div>
-    Echarts数据可视化开始
+    Echarts数据可视化开始1
   </div>
 </template>
 
