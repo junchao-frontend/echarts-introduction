@@ -3,8 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
-import * as echarts from 'echarts';
+import * as echarts from 'echarts' // 5.0版本的echarts引入方法
 import 'echarts-gl'
 Vue.prototype.$echarts = echarts
 
