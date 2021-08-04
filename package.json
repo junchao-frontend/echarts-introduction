@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "jquery": "^2.2.3",
     "@jiaminghi/data-view": "^2.10.0",
     "echarts": "^5.1.2",
     "echarts-gl": "^2.0.4",

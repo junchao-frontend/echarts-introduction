@@ -2,11 +2,13 @@
   <div>
     <div id="main" style="width:600px;height: 400px;border: 1px solid red"></div>
     <button id="add">增加数据</button>
+    <button id="btn">触发行为</button>
     <div id="pie" style="width: 600px; height: 400px"></div>
   </div>
 </template>
 
 <script>
+//import $ from 'jquery'
 export default {
   name: '',
 
@@ -16,7 +18,7 @@ export default {
   },
   mounted () {
     this.initBar();
-    //this.initPie();
+    this.initPie();
   },
   methods: {
     initBar () {
@@ -68,10 +70,16 @@ export default {
         }]
       }
       myChart.setOption(option)
+      //on 事件
+      myChart.on('click',function(a){
+          console.log(a)
+      })
+      
+
       // 监听window窗口大小变化的事件
       window.onresize = function(){
         console.log('111111')
-        this.myChart.resize()
+        myChart.resize()
       }
 
       var btnAdd = document.querySelector('#add')
@@ -91,56 +99,72 @@ export default {
       }
       
     },
-    // initPie () {
-    //   var myChart = this.$echarts.init(document.getElementById('pie'));
-    //   var option = {
-    //     title: {
-    //       text: '某站点用户访问来源',
-    //       subtext: '纯属虚构',
-    //       left: 'center'
-    //     },
-    //     tooltip: {
-    //       trigger: 'item'
-    //     },
-    //     legend: {
-    //       orient: 'vertical',
-    //       left: 'left',
-    //     },
-    //     series: [
-    //       {
-    //         name: '访问来源',
-    //         type: 'pie',
-    //         radius: '50%',
-    //         data: [
-    //           {
-    //             value: 1048, 
-    //             name: '搜索引擎',
-    //             emphasis:{
-    //               itemStyle:{
-    //                 color:'pink'
-    //               },
-    //               label:{
-    //                 color:'skyblue'
-    //               }
-    //             }
-    //            },
-    //           { value: 735, name: '直接访问' },
-    //           { value: 580, name: '邮件营销' },
-    //           { value: 484, name: '联盟广告' },
-    //           { value: 300, name: '视频广告' }
-    //         ],
-    //         emphasis: {
-    //           itemStyle: {
-    //             shadowBlur: 10,
-    //             shadowOffsetX: 0,
-    //             shadowColor: 'rgba(0, 0, 0, 0.5)'
-    //           }
-    //         }
-    //       }
-    //     ]
-    //   }
-    //   myChart.setOption(option)
-    // },
+    initPie () {
+      var myChart = this.$echarts.init(document.getElementById('pie'));
+      var option = {
+        title: {
+          text: '某站点用户访问来源',
+          subtext: '纯属虚构',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '50%',
+            data: [
+              {
+                value: 1048, 
+                name: '搜索引擎',
+                emphasis:{
+                  itemStyle:{
+                    color:'pink'
+                  },
+                  label:{
+                    color:'skyblue'
+                  }
+                }
+               },
+              { value: 735, name: '直接访问' },
+              { value: 580, name: '邮件营销' },
+              { value: 484, name: '联盟广告' },
+              { value: 300, name: '视频广告' }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+      myChart.setOption(option)
+      //on 事件
+      myChart.on('click',function(a){
+          console.log(a)
+      })
+      //触发图表行为
+      $('#btn').click(function(){
+        myChart.dispatchAction({
+          type:'showTip',
+          seriesIndex:1,
+          dataIndex:0
+          
+        })
+      })
+      $('#btn').click(function(){
+        myChart.clear()
+      })
+    },
   }
 }
 </script>
