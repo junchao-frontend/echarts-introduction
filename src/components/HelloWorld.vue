@@ -2,7 +2,9 @@
   <div>
     <div id="main" style="width:600px;height: 400px;border: 1px solid red"></div>
     <button id="add">增加数据</button>
+    <button id="btn2">增加数据22</button>
     <button id="btn">触发行为</button>
+    <button id="ceshi">测试</button>
     <div id="pie" style="width: 600px; height: 400px"></div>
   </div>
 </template>
@@ -97,6 +99,19 @@ export default {
         }
         myChart.setOption(option)
       }
+      $('#btn2').click(function(){
+        xDataArr.push('小王')
+        yDataArr.push(26)
+        var option = {
+          xAxis:{
+            data:xDataArr
+          },
+          series:[{
+            data:yDataArr
+          }]
+        }
+        myChart.setOption(option)
+      })
       
     },
     initPie () {
@@ -163,6 +178,15 @@ export default {
       })
       $('#btn').click(function(){
         myChart.clear()
+      })
+      $('#ceshi').click(function(){
+        $.ajax({
+          type:'get',
+          url:'http://127.0.0.1:8888/api/map',
+          success:function(data){
+            console.log(data)
+          }  //我用这个按钮测试的
+        })
       })
     },
   }
